@@ -1,7 +1,4 @@
-#include <algorithm>
-#include <vector>
-#include <iostream>
-using namespace std;
+// Equal Sum Arrays With Minimum Number of Operations
 class Solution {
 public:
     int minOperations(vector<int>& nums1, vector<int>& nums2) {
@@ -17,8 +14,6 @@ public:
           cnt2[nums2[i]]++;
           sum2+= nums2[i];
         }
-        printf("sum 1 = %d\n ",sum1);
-        printf("sum 2 = %d\n",sum2);
         if(sum1 == sum2) return ans;
         int val = abs(sum2-sum1);
         int minus[6]={};
@@ -50,33 +45,3 @@ public:
         return ans;
     }
 };
-
-int main(){
-  vector<int> a;
-  a.push_back(5);
-  a.push_back(2);
-  a.push_back(1);
-  a.push_back(5);
-  a.push_back(2);
-  a.push_back(2);
-  a.push_back(2);
-  a.push_back(2);
-  a.push_back(4);
-  a.push_back(3);
-  a.push_back(3);
-  a.push_back(5);
-  vector<int> b;
-  b.push_back(1);
-  b.push_back(4);
-  b.push_back(5);
-  b.push_back(5);
-  b.push_back(6);
-  b.push_back(3);
-  b.push_back(1);
-  b.push_back(3);
-  b.push_back(3);
-
-  Solution sol;
-  cout<<sol.minOperations(a,b);
-
-} 
