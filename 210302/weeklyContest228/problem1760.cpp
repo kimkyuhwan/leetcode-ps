@@ -2,36 +2,31 @@
 typedef long long ll;
 class Solution {
 public:
+
+    int isPossible(vector<int> nums, int n, int minValue){
+      for(int i=0;i<nums.size();i++){
+        int cnt = nums[i]/minValue;
+        if(nums[i]%minValue != 0){
+          cnt++;
+        }
+        n -= cnt;
+      }
+      return n >= 0;
+    }
     int minimumSize(vector<int>& nums, int maxOperations) {
-      int avg = 0;
-      int ans = 0;
-      ll total = 0;
-      for(int i=0;i<nums.size();i++){
-        total += nums[i];
-      }
       int n = nums.size() + maxOperations;
-      avg = total/n;
-      priority_queue<int> pq;
-      for(int i=0;i<nums.size();i++){
-        maxOperations -= nums[i]/avg;
-        if(avg > nums[i]){
-            continue;
+      int l = 1;
+      int r = 1000000000;
+      while(l<r){
+        int mid = (l+r)>>1;
+        if(isPossible(nums, n, mid)){
+          r = mid;
         }
         else{
-            
-        }
-        pq.push(nums[i]%avg);
-      }
-      for(int i=0;i<maxOperations;i++){
-        if(pq.empty()){
-          break;
-        }
-        else{
-          pq.pop();
+          l = mid+1;
         }
       }
-      if(!pq.empty()) ans = avg+pq.top();
-      else ans = avg;
+      int ans = l;
       return ans;
     }
 };
