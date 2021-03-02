@@ -1,14 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
-#include <cstring>
-using namespace std;
+// Minimum Limit of Balls in a Bag
 typedef long long ll;
 class Solution {
 public:
     int minimumSize(vector<int>& nums, int maxOperations) {
       int avg = 0;
+      int ans = 0;
       ll total = 0;
       for(int i=0;i<nums.size();i++){
         total += nums[i];
@@ -17,10 +13,16 @@ public:
       avg = total/n;
       priority_queue<int> pq;
       for(int i=0;i<nums.size();i++){
-        n -= nums[i]/avg;
+        maxOperations -= nums[i]/avg;
+        if(avg > nums[i]){
+            continue;
+        }
+        else{
+            
+        }
         pq.push(nums[i]%avg);
       }
-      for(int i=0;i<n;i++){
+      for(int i=0;i<maxOperations;i++){
         if(pq.empty()){
           break;
         }
@@ -28,16 +30,8 @@ public:
           pq.pop();
         }
       }
-      if(!pq.empty()) ans = pq.top();
+      if(!pq.empty()) ans = avg+pq.top();
       else ans = avg;
       return ans;
     }
 };
-
-vector<int> a;
-int main(){
-  Solution sol;
-  a.push_back(7);
-    a.push_back(17);
-  cout<<sol.minimumSize(a, 2);
-}

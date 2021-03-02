@@ -1,3 +1,4 @@
+// Minimum Changes To Make Alternating Binary String
 class Solution {
 public:
     int minOperations(string s) {

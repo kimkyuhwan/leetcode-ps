@@ -1,31 +1,31 @@
-typedef long long ll;
+// Count Number of Homogenous Substrings
 class Solution {
 public:
-
-    int isPossible(vector<int> nums, int n, int minValue){
-      for(int i=0;i<nums.size();i++){
-        int cnt = nums[i]/minValue;
-        if(nums[i]%minValue != 0){
-          cnt++;
+    int psum[100010];
+    int MOD = 1000000007;
+    int countHomogenous(string s) {
+        for(int i=1;i<=s.size();i++){
+          psum[i] = psum[i-1]+i;
+          psum[i]%=MOD;
         }
-        n -= cnt;
-      }
-      return n >= 0;
-    }
-    int minimumSize(vector<int>& nums, int maxOperations) {
-      int n = nums.size() + maxOperations;
-      int l = 1;
-      int r = 1000000000;
-      while(l<r){
-        int mid = (l+r)>>1;
-        if(isPossible(nums, n, mid)){
-          r = mid;
+        int cnt=1;
+        int ans=0;
+        char prevChar = s[0];
+        for(int i=1;i<=s.size();i++){
+          if(i == s.size()) {
+            ans+=psum[cnt];
+            ans%=MOD;  
+          }
+          else if(prevChar == s[i]){
+            cnt++;
+          }
+          else{
+            ans+=psum[cnt];
+            ans%=MOD;
+            cnt=1;
+            prevChar = s[i];
+          }
         }
-        else{
-          l = mid+1;
-        }
-      }
-      int ans = l;
-      return ans;
+        return ans;
     }
 };

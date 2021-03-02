@@ -1,3 +1,4 @@
+// Minimum Degree of a Connected Trio in a Graph
 class Solution {
 public:
     int init_value = 1000000000;
