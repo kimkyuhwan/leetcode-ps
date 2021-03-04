@@ -1,3 +1,4 @@
+// Closest Subsequence Sum
 class Solution {
 
 public:
@@ -11,8 +12,6 @@ public:
             sum += nums[j];
           }
         }
-        cout<<sum<<endl;
-
         ret.push_back(sum);
       }
       sort(ret.begin(), ret.end());
@@ -33,9 +32,8 @@ public:
         auto ub = upper_bound(b.begin(), b.end(), goal-val);
         int ll = lb - b.begin();
         int uu = ub - b.begin();
-        if(ll == a.size()) ll--;
+        if(ll == b.size()) ll--;
         if(uu == b.size()) uu--;
-        cout<<val <<" : "<<ll <<", "<<uu<<endl;
         int minn = min(abs(goal-(val+b[ll])), abs(goal-(val+b[uu])));
         ans = min(minn, ans);
       }
